@@ -1,0 +1,45 @@
+name: Simple ETL Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run ETL Script
+        run: |
+          python etl.py
+
+      - name: Build Docker Image
+        run: |
+          docker build -t simple-etl:${{ matrix.python-version }} .
+
+      - name: Run Docker Container
+        run: |
+          docker run simple-etl:${{ matrix.python-version }}
+
+      - name: Upload transformed file
+        uses: actions/upload-artifact@v4
+        with:
+          name: transformed-data-${{ matrix.python-version }}
+          path: transformed_employees.csv

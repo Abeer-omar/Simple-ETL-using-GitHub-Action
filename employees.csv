@@ -1,0 +1,13 @@
+employee_id,first_name,last_name,gender,date_of_birth,hire_date,department,job_title,city,country,salary,bonus_percent,performance_score,employment_type,manager_id
+1001,Abeer,Omar,F,1992-04-12,2018-06-15,Data,Data Engineer,Cairo,Egypt,18000,10,4,Full-Time,1008
+1002,Ahmed,Hassan,M,1988-09-23,2015-03-01,IT,System Administrator,Alexandria,Egypt,15000,8,3,Full-Time,1009
+1003,Sara,Ali,F,1995-01-30,2020-11-10,HR,HR Specialist,Giza,Egypt,12000,5,4,Full-Time,1010
+1004,Mostafa,Adel,M,1990-07-19,2017-08-22,Finance,Accountant,Cairo,Egypt,14000,7,3,Full-Time,1011
+1005,Nour,Samy,F,1998-12-05,2022-02-14,Marketing,Marketing Analyst,Cairo,Egypt,11000,6,5,Contract,1012
+1006,Khaled,Mohamed,M,1985-03-17,2012-09-30,IT,DevOps Engineer,Giza,Egypt,22000,12,5,Full-Time,1009
+1007,Laila,Ibrahim,F,1993-06-25,2019-05-18,Data,Data Analyst,Alexandria,Egypt,16000,9,4,Full-Time,1008
+1008,Hany,Fathy,M,1980-10-11,2010-01-01,Data,Data Manager,Cairo,Egypt,30000,15,5,Full-Time,
+1009,Karim,Tarek,M,1982-02-20,2009-04-10,IT,IT Manager,Giza,Egypt,32000,15,5,Full-Time,
+1010,Dina,Essam,F,1979-08-15,2008-07-12,HR,HR Manager,Cairo,Egypt,28000,14,4,Full-Time,
+1011,Amr,Youssef,M,1983-11-28,2011-06-20,Finance,Finance Manager,Alexandria,Egypt,29000,13,4,Full-Time,
+1012,Mona,Ragab,F,1987-05-09,2014-10-05,Marketing,Marketing Manager,Cairo,Egypt,27000,12,4,Full-Time,
