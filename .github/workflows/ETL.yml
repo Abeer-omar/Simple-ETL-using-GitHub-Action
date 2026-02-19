@@ -28,7 +28,7 @@ jobs:
 
       - name: Run ETL Script
         run: |
-          python etl.py
+          python python_script.py
 
       - name: Build Docker Image
         run: |
