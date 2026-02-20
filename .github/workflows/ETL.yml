@@ -45,6 +45,9 @@ jobs:
       - name: Run ETL Script
         run: |
           python python_script.py
+      
+      - name: Run Tests
+        run: pytest tests/
 
       - name: Install PostgreSQL client
         run: sudo apt-get update && sudo apt-get install -y postgresql-client
