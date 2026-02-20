@@ -1,7 +1,7 @@
 name: Simple ETL Pipeline V2
 
 on:
-  pull_request:
+  push:
     branches:
       - main
 
