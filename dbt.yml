@@ -1,0 +1,9 @@
+name: simple_etl
+version: 1.0
+profile: simple_etl
+
+model-paths: ["models"]
+
+models:
+  simple_etl:
+    +materialized: view

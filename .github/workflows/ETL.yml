@@ -8,6 +8,21 @@ on:
 jobs:
   etl-job:
     runs-on: ubuntu-latest
+  
+    services:
+        postgres:
+          image: postgres:15
+          env:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: etl_db
+          ports:
+            - 5432:5432
+          options: >-
+            --health-cmd="pg_isready -U postgres"
+            --health-interval=10s
+            --health-timeout=5s
+            --health-retries=5
 
     strategy:
       matrix:
@@ -31,9 +46,49 @@ jobs:
         run: |
           python python_script.py
 
-      - name: Run Tests
-        run: pytest tests/
-        
+      - name: Install PostgreSQL client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+
+      - name: Create table in Postgres
+        run: |
+          PGPASSWORD=postgres psql -h localhost -U postgres -d etl_db -c "
+          CREATE TABLE IF NOT EXISTS transformed_employees (
+            employee_id INT,
+            first_name TEXT,
+            department TEXT,
+            salary NUMERIC,
+            employment_type TEXT,
+            tax NUMERIC,
+            net_salary NUMERIC
+          );"
+
+      - name: Load CSV into Postgres
+        run: |
+          PGPASSWORD=postgres psql -h localhost -U postgres -d etl_db -c "\copy transformed_employees FROM 'transformed_employees.csv' DELIMITER ',' CSV HEADER;"
+
+      - name: Create dbt profile
+        run: |
+          mkdir -p ~/.dbt
+          echo "
+          simple_etl:
+            target: dev
+            outputs:
+              dev:
+                type: postgres
+                host: localhost
+                user: postgres
+                password: postgres
+                port: 5432
+                dbname: etl_db
+                schema: public
+          " > ~/.dbt/profiles.yml
+      
+      - name: Run dbt models
+        run: dbt run
+
+      - name: Run dbt tests
+        run: dbt test
+
       - name: Upload transformed file
         uses: actions/upload-artifact@v4
         with:

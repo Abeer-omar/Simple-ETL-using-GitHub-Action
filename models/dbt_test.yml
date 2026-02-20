@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: stg
+    columns:
+      - name: employee_id
+        tests:
+          - not_null
+          - unique
+
+      - name: salary
+        tests:
+          - not_null
+
+      - name: net_salary
+        tests:
+          - not_null
