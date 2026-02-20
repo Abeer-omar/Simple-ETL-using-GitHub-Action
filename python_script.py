@@ -6,7 +6,12 @@ def extract(file_path):
 
 def transform(df):
     print("Transforming data...")
-    df["salary"] = df["salary"] * 1.10
+
+    # tax is 10%
+    df["tax"] = df["salary"] * 0.10
+
+    df["net_salary"] = df["salary"] - df["tax"]
+
     return df
 
 def load(df, output_path):
