@@ -8,21 +8,6 @@ on:
 jobs:
   etl-job:
     runs-on: ubuntu-latest
-  
-    services:
-        postgres:
-          image: postgres:15
-          env:
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: postgres
-            POSTGRES_DB: etl_db
-          ports:
-            - 5432:5432
-          options: >-
-            --health-cmd="pg_isready -U postgres"
-            --health-interval=10s
-            --health-timeout=5s
-            --health-retries=5
 
     strategy:
       matrix:
@@ -36,6 +21,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+
+      - name: Setup PostgreSQL
+        uses: harmon758/postgresql-action@v1
+        with:
+          postgresql version: '15'
+          postgresql db: etl_db
+          postgresql user: postgres
+          postgresql password: postgres
 
       - name: Install dependencies
         run: |
