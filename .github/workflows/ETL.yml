@@ -31,6 +31,9 @@ jobs:
         run: |
           python python_script.py
 
+      - name: Run Tests
+        run: pytest tests/
+        
       - name: Upload transformed file
         uses: actions/upload-artifact@v4
         with:
