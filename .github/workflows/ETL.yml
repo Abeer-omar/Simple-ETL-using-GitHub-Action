@@ -81,6 +81,11 @@ jobs:
       
       - name: Run dbt models
         run: dbt run
+      
+      - name: Show dbt model output
+        run: |
+          PGPASSWORD=postgres psql -h localhost -U postgres -d etl_db -c "
+          SELECT * FROM public.stg;"
 
       - name: Run dbt tests
         run: dbt test
