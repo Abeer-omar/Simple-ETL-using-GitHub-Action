@@ -96,7 +96,7 @@ jobs:
           name: transformed-data-${{ matrix.python-version }}
           path: transformed_employees.csv
 
-  verify-artifact:
+  download-artifact:
     needs: etl-job
     runs-on: ubuntu-latest
 
